@@ -107,8 +107,45 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  const dozens = Math.floor(num / 10);
+  const units = num % 10;
+  for (let i = 0; i < dozens; i += 1) {
+    result = `${result}X`;
+  }
+  switch (units) {
+    case 1:
+      result = `${result}I`;
+      break;
+    case 2:
+      result = `${result}II`;
+      break;
+    case 3:
+      result = `${result}III`;
+      break;
+    case 4:
+      result = `${result}IV`;
+      break;
+    case 5:
+      result = `${result}V`;
+      break;
+    case 6:
+      result = `${result}VI`;
+      break;
+    case 7:
+      result = `${result}VII`;
+      break;
+    case 8:
+      result = `${result}VIII`;
+      break;
+    case 9:
+      result = `${result}IX`;
+      break;
+    default:
+      result = `${result}`;
+  }
+  return result;
 }
 
 /**
@@ -126,8 +163,57 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    let num = '';
+    switch (numberStr[i]) {
+      case '1':
+        num = 'one';
+        break;
+      case '2':
+        num = 'two';
+        break;
+      case '3':
+        num = 'three';
+        break;
+      case '4':
+        num = 'four';
+        break;
+      case '5':
+        num = 'five';
+        break;
+      case '6':
+        num = 'six';
+        break;
+      case '7':
+        num = 'seven';
+        break;
+      case '8':
+        num = 'eight';
+        break;
+      case '9':
+        num = 'nine';
+        break;
+      case '0':
+        num = 'zero';
+        break;
+      case '.':
+        num = 'point';
+        break;
+      case ',':
+        num = 'point';
+        break;
+      default:
+        num = 'minus';
+    }
+    if (i === 0) {
+      result += num;
+    } else {
+      result += ` ${num}`;
+    }
+  }
+  return result;
 }
 
 /**
@@ -188,8 +274,14 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const digits = Math.floor(Math.log10(num)) + 1;
+  let num2 = num;
+  for (let i = 0; i < digits; i += 1) {
+    if (num2 % 10 === digit) return true;
+    num2 = Math.floor(num2 / 10);
+  }
+  return false;
 }
 
 /**
