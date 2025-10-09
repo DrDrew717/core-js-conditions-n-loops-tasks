@@ -421,8 +421,19 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const result = arr;
+  const len = arr.length - 1;
+  for (let i = 0; i < len; i += 1) {
+    for (let y = 0; y < len - i; y += 1) {
+      if (result[y] > result[y + 1]) {
+        const x = result[y];
+        result[y] = result[y + 1];
+        result[y + 1] = x;
+      }
+    }
+  }
+  return result;
 }
 
 /**
@@ -480,8 +491,38 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+function getNearestBigger(number) {
+  const arr = [];
+  let result = 0;
+  let num = number;
+  while (num > 0) {
+    arr.unshift(num % 10);
+    num = Math.floor(num / 10);
+  }
+  let index = arr.length - 2;
+  while (arr[index] >= arr[index + 1]) {
+    index -= 1;
+  }
+  let index2 = arr.length - 1;
+  while (arr[index2] <= arr[index]) {
+    index2 -= 1;
+  }
+  const x = arr[index];
+  arr[index] = arr[index2];
+  arr[index2] = x;
+  let leftIndex = index + 1;
+  let rightIndex = arr.length - 1;
+  while (leftIndex < rightIndex) {
+    const y = arr[leftIndex];
+    arr[leftIndex] = arr[rightIndex];
+    arr[rightIndex] = y;
+    leftIndex += 1;
+    rightIndex -= 1;
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    result = result * 10 + arr[i];
+  }
+  return result;
 }
 
 module.exports = {
