@@ -382,7 +382,9 @@ function sortByAsc(/* arr */) {
  */
 function shuffleChar(str, iterations) {
   let result = str;
-  for (let y = 0; y < iterations; y += 1) {
+  let y = 0;
+  let z = 0;
+  do {
     let odd = '';
     let even = '';
     for (let i = 0; i < str.length; i += 1) {
@@ -393,7 +395,9 @@ function shuffleChar(str, iterations) {
       }
     }
     result = odd + even;
-  }
+    y += 1;
+    if (result === str && z === 0) z = y * 2;
+  } while (y < (z ? iterations % z : iterations));
   return result;
 }
 
